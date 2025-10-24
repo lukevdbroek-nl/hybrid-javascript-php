@@ -14,11 +14,10 @@ $vdomJson = json_encode($vdom, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
   <meta name="description" content="Hybrid PHP + JavaScript Virtual DOM Frontend Framework">
   <title>Hybrid PHP + JS vDOM</title>
 
-  <!-- Preload and async scripts for performance -->
-  <link rel="preload" href="./lib/dom.js" as="script">
-  <link rel="preload" href="index.js" as="script">
+  <!-- Preload scripts -->
+  <link rel="preload" href="./lib/vdom.js" as="script">
+  <link rel="preload" href="./index.js" as="script">
 
-  <!-- Add a favicon to avoid extra network errors -->
   <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 </head>
 <body>
@@ -27,14 +26,13 @@ $vdomJson = json_encode($vdom, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     <?= renderVDOM($vdom) ?>
   </main>
 
-  <!-- JSON inside script tag must NOT be escaped -->
   <script id="__VDOM__" type="application/json">
-    <?= $vdomJson ?>
+<?= $vdomJson ?>
   </script>
 
   <!-- Load scripts without blocking rendering -->
-  <script src="./lib/dom.js" defer></script>
-  <script src="index.js" defer></script>
+  <script src="./lib/vdom.js" defer></script>
+  <script src="./index.js" defer></script>
 
 </body>
 </html>

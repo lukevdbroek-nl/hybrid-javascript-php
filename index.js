@@ -2,24 +2,28 @@ window.addEventListener("DOMContentLoaded", () => {
     const raw = document.getElementById("__VDOM__").textContent;
     let initialVDOM = JSON.parse(raw);
 
+    indexVDOM(initialVDOM);
+
     let name = "Hybrid Javascript PHP";
 
     setInterval(() => {
         name = (name === "Hybrid Javascript PHP") ? "HJP" : "Hybrid Javascript PHP";
 
-        const newH1 = {
+        // create new vNode for reactive element
+        const newNode = {
             tag: "h1",
             attributes: { id: "title" },
             children: `Hello ${name}`
         };
 
-        // Reference the current reactive node in the static tree
-        const prevH1 = initialVDOM.children[0];
+        // get previous VDOM node with ID
+        const prevNode = vIndexDom['title'];
 
-        diffAndRerender(prevH1, newH1);
+        // patch prevNode with newNode
+        diffAndRerender(prevNode, newNode);
 
-        // Update just that part of the virtual DOM
-        initialVDOM.children[0] = newH1;
+        // Change the reference in VDOM Collection
+        vIndexDom['title'] = newNode;
     }, 1000);
 
 });
