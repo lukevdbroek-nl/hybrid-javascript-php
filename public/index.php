@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/lib/app.php';
+require_once __DIR__ . '/../server/app.php';
 
 $state = ['name' => 'Hybrid Javascript PHP'];
 $vdom = app($state);
@@ -15,9 +15,10 @@ $vdomJson = json_encode($vdom, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
   <title>Hybrid PHP + JS vDOM</title>
 
   <!-- Preload scripts -->
-  <link rel="preload" href="./lib/vdom.js" as="script">
-  <link rel="preload" href="./index.js" as="script">
-
+  <link rel="preload" href="./js/vdom.js" as="script">
+  <link rel="preload" href="./js/pages/index.js" as="script">
+  <link rel="stylesheet" href="../public/assets/index.css">
+  
   <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 </head>
 <body>
@@ -27,12 +28,12 @@ $vdomJson = json_encode($vdom, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
   </main>
 
   <script id="__VDOM__" type="application/json">
-<?= $vdomJson ?>
+  <?= $vdomJson ?>
   </script>
 
   <!-- Load scripts without blocking rendering -->
-  <script src="./lib/vdom.js" defer></script>
-  <script src="./index.js" defer></script>
+  <script src="./js/vdom.js" defer></script>
+  <script src="./js/pages/index.js" defer></script>
 
 </body>
 </html>
