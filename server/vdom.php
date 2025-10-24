@@ -1,4 +1,16 @@
 <?php
+function el(string $tag, array $attributes = [], $children = []) {
+    if(is_string($children)) {
+        $children = [$children];
+    }
+
+    return [
+        "tag" => $tag,
+        "attributes" => $attributes,
+        "children" => $children
+    ];
+}
+
 function renderVDOM($vnode) {
     if (is_string($vnode)) {
         return htmlspecialchars($vnode);
