@@ -1,29 +1,17 @@
+// page.js
 window.addEventListener("DOMContentLoaded", () => {
-    const raw = document.getElementById("__VDOM__").textContent;
-    let initialVDOM = JSON.parse(raw);
+  const raw = document.getElementById("__VDOM__").textContent;
+  let initialVDOM = JSON.parse(raw);
 
-    indexVDOM(initialVDOM);
+  indexVDOM(initialVDOM);
 
-    let name = "Hybrid Javascript PHP";
+  let state = { name: "Hybrid Javascript PHP" };
 
-    setInterval(() => {
-        name = (name === "Hybrid Javascript PHP") ? "HJP" : "Hybrid Javascript PHP";
-
-        // create new vNode for reactive element
-        const newNode = {
-            tag: "h1",
-            attributes: { id: "title" },
-            children: `Hello ${name}`
-        };
-
-        // get previous VDOM node with ID
-        const prevNode = vIndexDom['title'];
-
-        // patch prevNode with newNode
-        diffAndRerender(prevNode, newNode);
-
-        // Change the reference in VDOM Collection
-        vIndexDom['title'] = newNode;
-    }, 1000);
-
+  // Handle button click
+  document.body.addEventListener("click", (e) => {
+    if (e.target.matches("#update-btn")) {
+      state.name = (state.name === "Hybrid Javascript PHP") ? "HJP" : "Hybrid Javascript PHP";
+      updateState(state);
+    }
+  });
 });

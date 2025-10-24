@@ -18,6 +18,7 @@ $vdomJson = json_encode($vdom, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
   <!-- Preload scripts -->
   <link rel="preload" href="./js/vdom.js" as="script">
   <link rel="preload" href="./js/pages/page.js" as="script">
+  <link rel="preload" href="./js/runtime.js" as="script">
   <link rel="stylesheet" href="../public/assets/index.css">
   
   <link rel="icon" href="data:;base64,iVBORw0KGgo=">
@@ -34,6 +35,7 @@ $vdomJson = json_encode($vdom, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
   <!-- Load scripts without blocking rendering -->
   <script src="./js/vdom.js" defer></script>
+  <script src="./js/runtime.js" defer></script>
   <script src="./js/pages/page.js" defer></script>
 
 </body>

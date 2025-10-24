@@ -1,8 +1,13 @@
 <?php
 function el(string $tag, array $attributes = [], $children = []) {
-    if(is_string($children)) {
+    if (is_string($children)) {
         $children = [$children];
     }
+    if (!is_array($children)) {
+        $children = [];
+    }
+    // Filter out null/undefined
+    $children = array_values(array_filter($children, fn($c) => $c !== null && $c !== 'undefined'));
 
     return [
         "tag" => $tag,

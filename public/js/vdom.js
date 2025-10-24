@@ -14,16 +14,24 @@ const setAttributes = (element, attributes) => {
     )
 }
 
-const renderer = ({ tag, children = "", attributes = {} }) => {
-    const el = document.createElement(tag);
-    setAttributes(el, attributes);
+const renderer = (vnode) => {
+  if (typeof vnode === "string") {
+    return document.createTextNode(vnode);
+  }
 
-    if (typeof children === "string") {
-        el.innerHTML = children;
-    } else if (Array.isArray(children)) {
-        children.map(renderer).forEach(el.appendChild.bind(el));
-    }
-    return el;
+  const { tag, attributes = {}, children = [] } = vnode;
+  const el = document.createElement(tag);
+  setAttributes(el, attributes);
+
+  if (Array.isArray(children)) {
+    children.forEach(child => {
+      el.appendChild(renderer(child));
+    });
+  } else if (typeof children === "string") {
+    el.appendChild(document.createTextNode(children));
+  }
+
+  return el;
 }
 
 const areObjectsDifferent = (a, b) => {
@@ -42,14 +50,28 @@ const areNodesDifferent = (a, b) => {
         (typeA === 'string' && a.children != b.children);
 }
 
+const normalizeChildren = (node) => {
+  if (!node) return [];
+  if (typeof node.children === "string") return [node.children];
+  if (Array.isArray(node.children)) return node.children;
+  return [];
+};
+
 const diffAndRerender = (previousNode, currentNode) => {
-    if (areNodesDifferent(currentNode, previousNode)) {
-        const nodeId = currentNode.attributes.id;
-        previousNode.children = currentNode;
-        return document.querySelector(`#${nodeId}`).replaceWith(renderer(currentNode));
-    } else {
-        currentNode.children.forEach((cChildNode, index) => {
-            diffAndRerender(previousNode.children[index], cChildNode);
-        })
-    }
-}
+  if (areNodesDifferent(currentNode, previousNode)) {
+    const nodeId = currentNode.attributes.id;
+    if (!nodeId) return;
+
+    const domEl = document.querySelector(`#${nodeId}`);
+    if (domEl) domEl.replaceWith(renderer(currentNode));
+    vIndexDom[nodeId] = currentNode;
+    return;
+  }
+
+  const prevChildren = normalizeChildren(previousNode);
+  const currChildren = normalizeChildren(currentNode);
+
+  currChildren.forEach((cChildNode, index) => {
+    diffAndRerender(prevChildren[index], cChildNode);
+  });
+};
