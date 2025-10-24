@@ -29,8 +29,8 @@ $vdomJson = json_encode($vdom, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     <?= renderVDOM($vdom) ?>
   </main>
 
-  <script id="__VDOM__" type="application/json">
-  <?= $vdomJson ?>
+  <script>
+    window.__HJP_VDOM__ = JSON.stringify(<?= $vdomJson ?>);
   </script>
 
   <!-- Load scripts without blocking rendering -->
