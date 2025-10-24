@@ -1,5 +1,5 @@
 async function updateState(newState) {    
-  const response = await fetch("/developer/hybrid-javascript-php/server/update.php", {
+  const response = await fetch("../server/update.php", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(newState)
