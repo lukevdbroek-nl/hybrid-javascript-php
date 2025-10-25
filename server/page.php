@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/vdom.php';
+require_once __DIR__ . '/framework/vdom.php';
 require_once __DIR__ . '/framework/compile_html.php';
 
 function app($state) {
@@ -15,5 +15,5 @@ function app($state) {
     </div>
     HTML;
 
-    return compile_html($html);
+    return html_compile($html);
 }
