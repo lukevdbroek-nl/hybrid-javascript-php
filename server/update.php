@@ -3,7 +3,6 @@
 declare(strict_types=1);
 error_reporting(0); // Hide PHP notices/warnings in JSON response
 
-require_once __DIR__ . '/vdom.php';
 require_once __DIR__ . '/page.php';
 
 header('Content-Type: application/json; charset=utf-8');

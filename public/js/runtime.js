@@ -6,7 +6,6 @@ async function updateState(newState) {
   });
 
   const text = await response.text();
-
   try {
     const newVDOM = JSON.parse(text);
     const oldVDOM = JSON.parse(window.__HJP_VDOM__);

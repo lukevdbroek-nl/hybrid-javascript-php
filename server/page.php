@@ -9,11 +9,11 @@ function app($state) {
     $html = <<<HTML
     <div id="main">
         <h1 id="title">Hello {$name}</h1>
-        <h1 id="subtitle">This a reactive {$reactive} framework</h1>
+        <h1 id="subtitle">This is a reactive {$reactive} framework</h1>
         <p>Static content</p>
         <button id="update-btn">Toggle State</button>
     </div>
     HTML;
 
-    return html_compile($html);
+    return compile_html($html);
 }
