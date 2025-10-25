@@ -5,15 +5,15 @@ async function updateState(newState) {
     body: JSON.stringify(newState)
   });
 
-  const text = await response.text();
   try {
-    const newVDOM = JSON.parse(text);
+    const newVDOM = await response.json();
     const oldVDOM = JSON.parse(window.__HJP_VDOM__);
+
     diffAndRerender(oldVDOM, newVDOM);
-    window.__HJP_VDOM__ = JSON.stringify(newVDOM);
-    Object.keys(vIndexDom).forEach(id => delete vIndexDom[id]);
     indexVDOM(newVDOM);
+
   } catch (err) {
+    const text = await response.text();
     console.error("Invalid JSON from server:", text);
   }
 }
