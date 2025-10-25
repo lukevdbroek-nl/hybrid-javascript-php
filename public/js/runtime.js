@@ -1,3 +1,18 @@
+const events = ["click"];
+
+// Add global HJP variable
+window.HJP = {
+  actions: {},
+  register(name, fn) {
+    this.actions[name] = fn;
+  },
+  call(name, e) {
+    if (typeof this.actions[name] === "function") {
+      this.actions[name](e);
+    }
+  }
+};
+
 async function updateState(newState) {    
   const response = await fetch("../server/update.php", {
     method: "POST",
