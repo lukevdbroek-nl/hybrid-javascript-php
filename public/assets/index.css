@@ -53,7 +53,7 @@ p {
   margin-bottom: 2rem;
 }
 
-#update-btn {
+.update-btn {
   background: #0057ff;
   color: #fff;
   border: none;
