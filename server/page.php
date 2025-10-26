@@ -11,7 +11,7 @@ function app($state) {
         <h1 id="title">Hello {$name}</h1>
         <h1 id="subtitle">This is a reactive {$reactive} framework</h1>
         <p>Static content</p>
-        <button id="update-btn">Toggle State</button>
+        <button class="update-btn" data-action-click="toggleState">Toggle State</button>
     </div>
     HTML;
 
