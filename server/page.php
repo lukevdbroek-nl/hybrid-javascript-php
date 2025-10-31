@@ -1,19 +1,18 @@
 <?php
 require_once __DIR__ . '/framework/vdom.php';
 require_once __DIR__ . '/framework/compile_html.php';
+require_once __DIR__ . '/components/Button.php';
 
 function app($state) {
     $name = $state["name"] ?? "Hybrid Javascript PHP";
     $reactive = $state["reactive"] ?? "PHP";
 
-    $html = <<<HTML
+    ob_start(); ?>
     <div id="main">
-        <h1 id="title">Hello {$name}</h1>
-        <h1 id="subtitle">This is a reactive {$reactive} framework</h1>
+        <h1 id="title">Hello <?php echo $name; ?></h1>
+        <h1 id="subtitle">This is a reactive <?php echo $reactive; ?> framework</h1>
         <p>Static content</p>
-        <button class="update-btn" data-action-click="toggleState">Toggle State</button>
+        <?php new Button("Toggle State", "toggleState"); ?>
     </div>
-    HTML;
-
-    return compile_html($html);
+    <?php return compile_html(ob_get_clean());
 }
